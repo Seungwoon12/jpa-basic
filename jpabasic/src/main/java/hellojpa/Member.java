@@ -37,11 +37,19 @@ public class Member {
         this.username = username;
     }
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     public Team getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
+    // setter는 뭔가 관례적인 느낌이라 메서드 이름을 명확하게 changeTeam으로 해줬다.
+    // 이것을 연관관계 편의 메서드라고 한다.
+    // Team쪽에서 연관관계 메서드를 사용할거면 Member쪽은 사용x. 둘 중 하나에서만 사용해야함
+//    public void changeTeam(Team team) {
+//        this.team = team;
+//        team.getMembers().add(this);
+//    }
 }

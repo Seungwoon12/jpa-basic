@@ -25,8 +25,12 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.setTeam(team);
+//            member.changeTeam(team); Team 객체에서 연관관계 메서드를 사용할거면 Member쪽은 사용x
             em.persist(member);
+
+            team.addMember(member);
+
+//            team.getMembers().add(member); 이거를 Member의 changeTeam() 메서드에서 설정해준다.
 
             em.flush();
             em.clear();
@@ -34,10 +38,11 @@ public class JpaMain {
             Member findMember = em.find(Member.class, member.getId());
             List<Member> members = findMember.getTeam().getMembers();
 
+            System.out.println("===================");
             for (Member m : members) {
                 System.out.println("m = " + m.getUsername());
             }
-
+            System.out.println("===================");
 
             tx.commit();
         } catch (Exception e) {
