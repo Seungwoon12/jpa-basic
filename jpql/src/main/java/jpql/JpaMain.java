@@ -1,9 +1,7 @@
-package hellojpa;
+package jpql;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 public class JpaMain {
 
@@ -19,15 +17,15 @@ public class JpaMain {
         try {
             Member member = new Member();
             member.setUsername("member1");
+            member.setAge(10);
             em.persist(member);
 
-            //flush -> commit, query
+            Member result = em.createQuery("select m from Member m where m.username = :username", Member.class)
+                    .setParameter("username", "member1")
+                    .getSingleResult();
 
-            List<Member> resultList = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER", Member.class)
-                    .getResultList();
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1.getUsername());
-            }
+            System.out.println("result = " + result.getUsername());
+
 
             tx.commit();
 
