@@ -22,12 +22,11 @@ public class JpaMain {
             em.persist(member);
 
             //flush -> commit, query
+            em.flush();
+            em.clear();
 
-            List<Member> resultList = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER", Member.class)
+            List<Team> result = em.createQuery("select t from Member m join m.team t", Team.class)
                     .getResultList();
-            for (Member member1 : resultList) {
-                System.out.println("member1 = " + member1.getUsername());
-            }
 
             tx.commit();
 

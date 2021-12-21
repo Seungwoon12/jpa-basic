@@ -83,9 +83,9 @@ public class Member {
     //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn
-//    private Team team;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
+    private Team team;
 //
 //
 //    public Long getId() {
@@ -104,13 +104,13 @@ public class Member {
 //        this.username = username;
 //    }
 //
-//    public void setTeam(Team team) {
-//        this.team = team;
-//    }
-//
-//    public Team getTeam() {
-//        return team;
-//    }
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
 
     // setter는 뭔가 관례적인 느낌이라 메서드 이름을 명확하게 changeTeam으로 해줬다.
     // 이것을 연관관계 편의 메서드라고 한다.
